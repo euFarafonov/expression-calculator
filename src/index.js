@@ -11,7 +11,7 @@ function expressionCalculator(expr) {
   }
 
   if (expr.indexOf("(") != -1) {
-    openBrackets(expr);
+    return openBrackets(expr);
   } else {
     return parse(expr);
   }
@@ -36,10 +36,11 @@ function expressionCalculator(expr) {
     newStr = str.slice(0, open) + res + str.slice(close + 1);
 
     if (newStr.indexOf("(") != -1) {
-      openBrackets(newStr);
+      newStr = openBrackets(newStr);
     } else {
       return parse(newStr);
     }
+    return newStr;
   }
 
   function parse(str) {
@@ -109,25 +110,24 @@ function expressionCalculator(expr) {
         cnt++;
       }
     }
+    function calculate(x, y, op) {
+      if (op == "/" && y == "0") {
+        throw new Error("TypeError: Devision by zero.");
+      }
 
-    return Number(result.toFixed(4));
-  }
-
-  function calculate(x, y, op) {
-    if (op == "/" && y == "0") {
-      throw new Error("TypeError: Devision by zero.");
+      switch (op) {
+        case "*":
+          return x * y;
+        case "/":
+          return x / y;
+        case "+":
+          return x + y;
+        case "-":
+          return x - y;
+      }
     }
 
-    switch (op) {
-      case "*":
-        return x * y;
-      case "/":
-        return x / y;
-      case "+":
-        return x + y;
-      case "-":
-        return x - y;
-    }
+    return result;
   }
 
   function isNumeric(n) {
