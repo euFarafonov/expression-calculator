@@ -112,7 +112,7 @@ function expressionCalculator(expr) {
     }
     function calculate(x, y, op) {
       if (op == "/" && y == "0") {
-        throw new Error("TypeError: Devision by zero.");
+        throw new Error("TypeError: Division by zero.");
       }
 
       switch (op) {
